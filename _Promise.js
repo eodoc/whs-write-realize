@@ -3,7 +3,7 @@ const PENDING = 'pending'
 const FULFILLED = 'fulfilled'
 const REJECTED = 'rejected'
 
-function HPromise (func) {
+function _Promise (func) {
 
   this.status = PENDING
   this.onFulFillCallbacks = []
@@ -42,10 +42,10 @@ function HPromise (func) {
   }
 }
 
-HPromise.prototype.then = function (onFulFilled, onRejected) {
+_Promise.prototype.then = function (onFulFilled, onRejected) {
   const self = this
   if (this.status === PENDING) {
-    var pendingPromise = new HPromise(function (resolve, reject) {
+    var pendingPromise = new _Promise(function (resolve, reject) {
       self.onRejectCallBacks.push(function () {
         setTimeout(function () {
           try {
@@ -71,7 +71,7 @@ HPromise.prototype.then = function (onFulFilled, onRejected) {
   }
 
   if (this.status === REJECTED) {
-    const rejectPromise = new HPromise(function (resolve, reject) {
+    const rejectPromise = new _Promise(function (resolve, reject) {
       setTimeout(function () {
         try {
           const res = onRejected(self.value)
@@ -85,7 +85,7 @@ HPromise.prototype.then = function (onFulFilled, onRejected) {
   }
 
   if (this.status === FULFILLED) {
-    const fulfillPromise = new HPromise(function (resolve, reject) {
+    const fulfillPromise = new _Promise(function (resolve, reject) {
       setTimeout(function () {
         try {
           const res = onFulFilled(self.value)
@@ -100,14 +100,14 @@ HPromise.prototype.then = function (onFulFilled, onRejected) {
 }
 
 // 同步
-const p1 = new HPromise(function (resolve, reject) {
+const p1 = new _Promise(function (resolve, reject) {
   resolve('p1')
 }).then(function (result) {
   console.log(result)
 })
 
 // 异步
-const p2 = new HPromise(function (resolve, reject) {
+const p2 = new _Promise(function (resolve, reject) {
   setTimeout(() => {
     resolve('p2')
   }, 500)
@@ -116,7 +116,7 @@ const p2 = new HPromise(function (resolve, reject) {
 })
 
 // 多个
-const p3 = new HPromise(function (resolve, reject) {
+const p3 = new _Promise(function (resolve, reject) {
   resolve('p3')
 })
 p3.then(function (result) {
@@ -127,7 +127,7 @@ p3.then(function (result) {
 })
 
 // 失败
-const p4 = new HPromise(function (resolve, reject) {
+const p4 = new _Promise(function (resolve, reject) {
   reject('p4')
 }).then(function (result) {
   console.log(result)
@@ -136,7 +136,7 @@ const p4 = new HPromise(function (resolve, reject) {
 })
 
 // 语法错误
-const p5 = new HPromise(function (resolve, reject) {
+const p5 = new _Promise(function (resolve, reject) {
   const a = 1
   a = 2
 }).then(function (result) {
