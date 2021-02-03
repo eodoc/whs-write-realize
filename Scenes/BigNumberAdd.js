@@ -1,9 +1,13 @@
+/* 大数相加 */
+
+// BigInt实现大数相加
 function add (num1, num2) {
   const numberBig1 = BigInt(num1)
   const numberBig2 = BigInt(num2)
   return (numberBig1 + numberBig2).toString()
-} 
+}
 
+// 拆分大数为固定长度的小数进行相加、多余进位
 function add1 (num1, num2) {
   const size = 10
   const maxLength = Math.max(num1.length, num2.length)

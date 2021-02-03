@@ -40,8 +40,10 @@ tree = [
 */
 
 
+// 思路：递归找子节点是否满足条件，满足条件新建节点加入结果数组
 
 // 实现该函数，要求不允许对原有的tree做任何修改，最终返回结果是一棵新结构出来的树
+
 function filter (tree, str) {
   let res = []
   tree.forEach(item => {
