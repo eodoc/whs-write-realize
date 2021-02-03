@@ -49,7 +49,7 @@ function filter (tree, str) {
       res.push(item)
     } else {
       let children = item.children
-      if (children && children.length>0) {
+      if (children && children.length > 0) {
         const nodes = filter(children, str)
         if (nodes.length > 0) {
           res.push({

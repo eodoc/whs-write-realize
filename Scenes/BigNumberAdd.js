@@ -32,12 +32,3 @@ function add1 (num1, num2) {
 
 const aa = add1('1', '99999')
 console.log(aa)
-
-
-
-// http 
-
-
-
-
-

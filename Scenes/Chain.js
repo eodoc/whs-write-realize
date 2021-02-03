@@ -1,4 +1,5 @@
 
+// 实现等待执行输出
 function Chain () {
   this.tasks = []
   this.eat = function () {
@@ -37,7 +38,7 @@ function Chain () {
   })
 }
 
-const chain = new Chain();
+const chain = new Chain()
 chain
   .eat()
   .sleep(1)
@@ -45,5 +46,5 @@ chain
   .sleep(2)
   .work()
 
-  chain.sleep(2).eat()
+chain.sleep(2).eat()
 
