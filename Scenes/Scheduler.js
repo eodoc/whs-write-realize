@@ -42,9 +42,9 @@ const addTask = (time, order) => {
 	scheduler.add(() => timeout(time)).then(() => console.log(order))
 }
 
-addTask(400, 4) 
-addTask(200, 2) 
-addTask(300, 3) 
-addTask(100, 1) 
+addTask(400, 4)
+addTask(200, 2)
+addTask(300, 3)
+addTask(100, 1)
 
 // 2, 4, 3, 1

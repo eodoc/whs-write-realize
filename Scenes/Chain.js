@@ -39,13 +39,89 @@ function Chain () {
   })
 }
 
-const chain = new Chain()
-chain
+// const chain = new Chain()
+// chain
+//   .eat()
+//   .sleep(1)
+//   .eat()
+//   .sleep(2)
+//   .work()
+
+// chain.sleep(2).eat()
+
+function NewChain () {
+  this.tasks = []
+  this.runningTask = null
+
+  this.eat = function () {
+    const task = function () {
+      return new Promise(function (resolve, reject) {
+        console.log('eat')
+        resolve()
+      })
+    }
+    if (this.runningTask) {
+      this.tasks.push(task)
+    } else {
+      this.runningTask = task
+      this.runTask()
+    }
+    return this
+  }
+
+  this.work = function () {
+    const task = function () {
+      return new Promise(function (resolve, reject) {
+        console.log('work')
+        resolve()
+      })
+    }
+    if (this.runningTask) {
+      this.tasks.push(task)
+    } else {
+      this.runningTask = task
+      this.runTask()
+    }
+    return this
+  }
+
+  this.sleep = function (time) {
+    const task = function () {
+      return new Promise(function (resolve, reject) {
+        setTimeout(() => {
+          console.log(`wait ${time}`)
+          resolve()
+        }, time * 1000)
+      })
+    }
+    if (this.runningTask) {
+      this.tasks.push(task)
+    } else {
+      this.runningTask = task
+      this.runTask()
+    }
+    return this
+  }
+
+  this.runTask = function () {
+    const self = this
+    this.runningTask().then(function () {
+      if (self.tasks.length > 0) {
+        self.runningTask = self.tasks.shift()
+        self.runTask()
+      }
+    })
+  }
+
+  return this
+}
+
+const newChain = new NewChain()
+newChain
   .eat()
   .sleep(1)
   .eat()
   .sleep(2)
   .work()
 
-chain.sleep(2).eat()
-
+newChain.sleep(2).eat()

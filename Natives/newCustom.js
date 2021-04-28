@@ -12,37 +12,28 @@
 如果函数没有返回对象类型Object(包含Functoin, Array, Date, RegExg, Error)，那么new表达式中的函数调用将返回该对象引用。
 
  */
-function _New (func) {
-  var res = {}
-  if (!func.prototype) {
-    throw new TypeError(`${func.name} is not a constructor`)
+
+var newCustom = function (constructor) {
+  if (!constructor.prototype) {
+    throw new TypeError(`${constructor.name || constructor} is not a constructor`)
   }
-  Object.setPrototypeOf(res, func.prototype)
-  var options = Array.prototype.slice.call(arguments, 1)
-  var ret = func.apply(res, options)
-  if ((typeof ret === 'object' || typeof ret === 'function') && ret !== null) {
-    return ret
+
+  var ret = Object.create(constructor.prototype)
+  var args = Array.prototype.slice.call(arguments, 1)
+  var res = constructor.apply(ret, args)
+  if ((typeof res === 'object' || typeof res === 'function') && res !== null) {
+    return res
   }
-  return res
+  return ret
 }
 
-function New(func) {
-  var res = {};
-  if (func.prototype !== null) {
-      res.__proto__ = func.prototype;
-  }
-  var ret = func.apply(res, Array.prototype.slice.call(arguments, 1));
-  if ((typeof ret === "object" || typeof ret === "function") && ret !== null) {
-      return ret;
-  }
-  return res;
-}
 
 // 默认
 var A1 = function () {
 
 }
 var a1 = new A1()
+var a1 = newCustom(A1)
 console.log(a1)
 
 // 传参数
@@ -50,4 +41,5 @@ var A2 = function (name) {
   this.name = name
 }
 console.log(new A2('saber'))
+console.log(newCustom(A2, 'saber'))
 

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>宽高百分之五十-padding百分比是基于width</title>
+    <style>
+        .outer {
+            width: 400px;
+            height: 600px;
+            background: red;
+        }
+
+        .inner {
+            width: 50%;
+            padding-bottom: 50%;
+            background: blue;
+        }
+
+        /* body {
+            height: 2000px;
+        }
+
+        *::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background: #d5d5d5 !important;
+            border-radius: 5px;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background-color: #d5d5d5;
+            position: absolute;
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="outer">
+        <div class="inner"></div>
+    </div>
+</body>
+
+</html>
